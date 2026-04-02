@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart KSSR Lesson Planner</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div id="cursor-glow"></div>
+
+    <nav class="glass-nav">
+        <div class="logo">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Smart KSSR Planner</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="active">Dashboard</a>
+            <a href="#">Templates</a>
+            <a href="#">Settings</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="glass-card form-section reveal" id="form-container">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-pen-to-square"></i> New Lesson Plan</h2>
+                <button class="btn-clear" id="clear-btn"><i class="fa-solid fa-rotate-right"></i> Clear Data</button>
+            </div>
+            
+            <form id="lesson-form">
+                <div class="form-group-title">General Information</div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Teacher Name</label>
+                        <input type="text" id="teacher-name" placeholder="e.g. Mr. Ahmad" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Class Name</label>
+                        <input type="text" id="class-name" placeholder="e.g. 1 Bestari" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Subject</label>
+                        <select id="subject" required>
+                            <option value="" disabled selected>Select Subject</option>
+                            <option value="English">English</option>
+                            <option value="Mathematics">Mathematics</option>
+                            <option value="Science">Science</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Year</label>
+                        <select id="year" required>
+                            <option value="" disabled selected>Select Year</option>
+                            <option value="Year 1">Year 1</option>
+                            <option value="Year 2">Year 2</option>
+                            <option value="Year 3">Year 3</option>
+                            <option value="Year 4">Year 4</option>
+                            <option value="Year 5">Year 5</option>
+                            <option value="Year 6">Year 6</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Day</label>
+                        <select id="day" required>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Time</label>
+                        <input type="time" id="time" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Number of Pupils</label>
+                        <input type="number" id="pupils" placeholder="e.g. 30" required>
+                    </div>
+                </div>
+
+                <div class="form-group-title mt-2">Curriculum Standards</div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Theme</label>
+                        <select id="theme">
+                            <option value="" disabled selected>Select Theme</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Topic</label>
+                        <input type="text" id="topic" placeholder="e.g. My Family">
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Content Standard</label>
+                        <select id="content-standard">
+                            <option value="" disabled selected>Select Content Standard</option>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Learning Standard</label>
+                        <select id="learning-standard">
+                            <option value="" disabled selected>Select Learning Standard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group-title mt-2">Objectives & Execution</div>
+                <div class="form-grid">
+                    <div class="input-group full-width">
+                        <label>Objective Builder (Preset)</label>
+                        <select id="objective-builder">
+                            <option value="" disabled selected>Add an objective phrasing...</option>
+                            <option value="By the end of the lesson, pupils will be able to ">By the end of the lesson, pupils will be able to...</option>
+                            <option value="Pupils can identify ">Pupils can identify...</option>
+                            <option value="Pupils can construct ">Pupils can construct...</option>
+                            <option value="Pupils can respond orally to ">Pupils can respond orally to...</option>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Lesson Objective</label>
+                        <textarea id="lesson-objective" rows="3" placeholder="Define clear and measurable objectives..."></textarea>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Success Criteria</label>
+                        <textarea id="success-criteria" rows="2" placeholder="Pupils will be successful if they can..."></textarea>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Teaching Aids / Materials</label>
+                        <input type="text" id="teaching-aids" placeholder="e.g. Flashcards, Projector, Textbook page 12">
+                    </div>
+                </div>
+
+                <div class="form-group-title mt-2">Pedagogy & Reflection</div>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Cross-Curricular Elements (EMK)</label>
+                        <select id="emk">
+                            <option value="Language">Language</option>
+                            <option value="Environmental Sustainability">Environmental Sustainability</option>
+                            <option value="Values">Values</option>
+                            <option value="Science & Technology">Science & Technology</option>
+                            <option value="Patriotism">Patriotism</option>
+                            <option value="Creativity & Innovation">Creativity & Innovation</option>
+                            <option value="Entrepreneurship">Entrepreneurship</option>
+                            <option value="ICT">ICT</option>
+                            <option value="Global Sustainability">Global Sustainability</option>
+                            <option value="Financial Education">Financial Education</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>HOTS / KBAT Element</label>
+                        <select id="hots">
+                            <option value="Application">Application</option>
+                            <option value="Analysis">Analysis</option>
+                            <option value="Evaluation">Evaluation</option>
+                            <option value="Creation">Creation</option>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Assessment Method</label>
+                        <select id="assessment">
+                            <option value="Observation">Observation</option>
+                            <option value="Written Work">Written Work</option>
+                            <option value="Oral Presentation">Oral Presentation</option>
+                            <option value="Quiz">Quiz</option>
+                            <option value="Project">Project</option>
+                        </select>
+                    </div>
+                    <div class="input-group full-width">
+                        <label>Reflection (Post-Lesson)</label>
+                        <textarea id="reflection" rows="2" placeholder="____ / ____ pupils were able to achieve the lesson objectives..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary"><i class="fa-solid fa-wand-magic-sparkles"></i> Generate Lesson Plan</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="output-section hidden reveal" id="output-container">
+            <div class="action-bar">
+                <h3><i class="fa-solid fa-file-lines"></i> Generated Plan</h3>
+                <div class="btn-group">
+                    <button class="btn-secondary" id="edit-btn"><i class="fa-solid fa-pen"></i> Edit</button>
+                    <button class="btn-secondary" id="print-btn"><i class="fa-solid fa-print"></i> Print</button>
+                    <button class="btn-primary" id="pdf-btn"><i class="fa-solid fa-file-pdf"></i> Export PDF</button>
+                </div>
+            </div>
+
+            <div class="lesson-card" id="lesson-plan-card">
+                <div class="lp-header">
+                    <h2>Daily Lesson Plan</h2>
+                    <h4 id="out-subject-year"></h4>
+                </div>
+                <div class="lp-grid">
+                    <div class="lp-item"><strong>Teacher:</strong> <span id="out-teacher"></span></div>
+                    <div class="lp-item"><strong>Class:</strong> <span id="out-class"></span></div>
+                    <div class="lp-item"><strong>Date:</strong> <span id="out-date"></span></div>
+                    <div class="lp-item"><strong>Day:</strong> <span id="out-day"></span></div>
+                    <div class="lp-item"><strong>Time:</strong> <span id="out-time"></span></div>
+                    <div class="lp-item"><strong>Pupils:</strong> <span id="out-pupils"></span></div>
+                </div>
+                <div class="lp-body">
+                    <div class="lp-row"><strong>Theme:</strong> <span id="out-theme"></span></div>
+                    <div class="lp-row"><strong>Topic:</strong> <span id="out-topic"></span></div>
+                    <hr>
+                    <div class="lp-row"><strong>Content Standard:</strong> <span id="out-cs"></span></div>
+                    <div class="lp-row"><strong>Learning Standard:</strong> <span id="out-ls"></span></div>
+                    <hr>
+                    <div class="lp-row block-text"><strong>Lesson Objective:</strong> <div id="out-objective"></div></div>
+                    <div class="lp-row block-text"><strong>Success Criteria:</strong> <div id="out-success"></div></div>
+                    <hr>
+                    <div class="lp-grid mt-1">
+                        <div class="lp-item"><strong>Teaching Aids:</strong> <span id="out-aids"></span></div>
+                        <div class="lp-item"><strong>EMK:</strong> <span id="out-emk"></span></div>
+                        <div class="lp-item"><strong>HOTS:</strong> <span id="out-hots"></span></div>
+                        <div class="lp-item"><strong>Assessment:</strong> <span id="out-assessment"></span></div>
+                    </div>
+                    <hr>
+                    <div class="lp-row block-text"><strong>Reflection:</strong> <div id="out-reflection"></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

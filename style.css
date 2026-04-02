@@ -1,16 +1,17 @@
-/* Custom Properties & Variables */
+/* Custom Properties & Variables - Now with 100% more neon */
 :root {
-    --primary: #4F46E5;
-    --primary-hover: #4338CA;
-    --accent: #06B6D4;
-    --bg-gradient-1: #0f172a;
-    --bg-gradient-2: #1e1b4b;
-    --bg-gradient-3: #111827;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --card-bg: #ffffff;
+    --primary: #ff00ff;
+    --primary-hover: #ff1493;
+    --accent: #00ffff;
+    --bg-gradient-1: #ff0055;
+    --bg-gradient-2: #3a00ff;
+    --bg-gradient-3: #00ffcc;
+    --bg-gradient-4: #ffff00;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --text-main: #ffffff;
+    --text-muted: #e0e0e0;
+    --card-bg: rgba(255, 255, 255, 0.9);
     --card-text: #0f172a;
 }
 
@@ -19,77 +20,108 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    /* Everything smoothly transitions, constantly */
+    transition: all 0.1s ease-in-out; 
 }
 
+/* 1. The "Seizure" Background */
 body {
-    background: linear-gradient(-45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3));
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    background: linear-gradient(45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4));
+    background-size: 800% 800%;
+    animation: crazyGradient 3s infinite linear;
     color: var(--text-main);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+    perspective: 1000px; /* For 3D wildness */
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+@keyframes crazyGradient {
+    0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+    50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
+    100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
 }
 
-/* Cursor Glow Effect */
+/* 2. The Overactive Cursor */
 #cursor-glow {
     position: fixed;
     top: 0;
     left: 0;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(0,0,0,0) 70%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(255, 0, 255, 0.4) 40%, rgba(0,0,0,0) 80%);
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 0;
-    transition: width 0.2s, height 0.2s;
+    mix-blend-mode: screen;
+    animation: cursorPulse 0.5s infinite alternate;
 }
 
-/* Navigation */
+@keyframes cursorPulse {
+    0% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+}
+
+/* 3. Bouncing Navigation */
 .glass-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
     background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--accent);
     position: sticky;
     top: 0;
     z-index: 100;
+    animation: navBounce 2s infinite ease-in-out;
+    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+}
+
+@keyframes navBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(5px); }
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(to right, #818cf8, #22d3ee);
+    font-size: 1.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    animation: textFlicker 1s infinite;
+}
+
+@keyframes textFlicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
+    20%, 24%, 55% { text-shadow: none; }
 }
 
 .nav-links a {
     color: var(--text-main);
     text-decoration: none;
     margin-left: 2rem;
-    font-weight: 500;
-    transition: color 0.3s;
+    font-weight: bold;
+    animation: linkWiggle 3s infinite;
+    display: inline-block;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover {
     color: var(--accent);
+    transform: scale(1.3) rotate(10deg);
+    text-shadow: 0 0 15px var(--accent);
 }
 
-/* Main Layout */
+@keyframes linkWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+/* 4. Main Layout & Floating Cards */
 .container {
     max-width: 1000px;
     margin: 3rem auto;
@@ -98,213 +130,186 @@ body {
     z-index: 10;
 }
 
-/* Glassmorphism Cards */
 .glass-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    border: 3px solid var(--glass-border);
     border-radius: 20px;
     padding: 2.5rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 40px rgba(255, 0, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.3);
     margin-bottom: 2rem;
+    animation: cardFloat 3s infinite alternate ease-in-out;
 }
 
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid var(--glass-border);
+@keyframes cardFloat {
+    0% { transform: translateY(0px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 0 40px rgba(255, 0, 255, 0.5); }
+    100% { transform: translateY(-20px) rotateX(-2deg) rotateY(2deg); box-shadow: 0 0 60px rgba(0, 255, 255, 0.8); border-color: var(--primary); }
 }
 
-.form-group-title {
-    font-size: 1.2rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
-    font-weight: 600;
+.section-header h2 {
+    font-size: 2rem;
+    text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
+    animation: rgbSplit 0.5s infinite alternate;
 }
 
-.mt-2 { margin-top: 2rem; }
-.mt-1 { margin-top: 1rem; }
+@keyframes rgbSplit {
+    0% { text-shadow: 3px 0 0 red, -3px 0 0 cyan; }
+    100% { text-shadow: -3px 0 0 red, 3px 0 0 cyan; }
+}
 
-/* Form Elements */
+/* 5. Inputs That Won't Sit Still */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
-.input-group.full-width {
-    grid-column: 1 / -1;
-}
+.input-group.full-width { grid-column: 1 / -1; }
 
 label {
     display: block;
     margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-    color: var(--text-muted);
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px #ff00ff;
 }
 
 input, select, textarea {
     width: 100%;
     padding: 0.8rem 1rem;
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid var(--accent);
     border-radius: 10px;
-    color: var(--text-main);
-    font-size: 1rem;
+    color: #fff;
+    font-size: 1.1rem;
     outline: none;
-    transition: all 0.3s ease;
+    animation: inputPulse 2s infinite alternate;
+}
+
+@keyframes inputPulse {
+    0% { box-shadow: 0 0 5px var(--accent); border-color: var(--accent); }
+    100% { box-shadow: 0 0 20px var(--primary); border-color: var(--primary); transform: scale(1.02); }
 }
 
 input:focus, select:focus, textarea:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    animation: inputFocusShake 0.2s infinite;
+    background: rgba(255, 255, 255, 0.2);
 }
 
-/* Buttons */
+@keyframes inputFocusShake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-3px) rotate(-1deg); }
+    75% { transform: translateX(3px) rotate(1deg); }
+    100% { transform: translateX(0); }
+}
+
+/* 6. Hyperactive Buttons */
 button {
     cursor: pointer;
     border: none;
     border-radius: 10px;
-    font-weight: 600;
-    transition: all 0.3s ease;
+    font-weight: 900;
+    font-size: 1.2rem;
+    text-transform: uppercase;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    padding: 0.8rem 1.5rem;
+    padding: 1rem 2rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+    background-size: 300%;
     color: white;
-    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    animation: rainbowButton 2s infinite linear, heartbeat 0.8s infinite;
+    box-shadow: 0 0 20px #fff;
+}
+
+@keyframes rainbowButton {
+    0% { background-position: 0%; }
+    100% { background-position: 100%; }
+}
+
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    20% { transform: scale(1.15); }
+    40% { transform: scale(1); }
+    60% { transform: scale(1.15); }
+    80%, 100% { transform: scale(1); }
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+    transform: scale(1.3) rotate(5deg);
+    box-shadow: 0 0 50px #fff, 0 0 100px var(--primary);
+    animation: none; /* Stop heartbeat on hover so they can actually click it */
 }
 
-.btn-secondary {
-    background: rgba(255,255,255,0.1);
-    color: white;
-    border: 1px solid var(--glass-border);
-}
-
-.btn-secondary:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-.btn-clear {
-    background: transparent;
-    color: var(--text-muted);
-    padding: 0.5rem 1rem;
-}
-
-.btn-clear:hover {
-    color: #ef4444;
-    background: rgba(239, 68, 68, 0.1);
-}
-
-.form-actions {
-    margin-top: 2rem;
-    text-align: right;
-}
-
-/* Utilities */
-.hidden { display: none !important; }
-
-.reveal {
-    animation: fadeIn 0.5s ease forwards;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Output Section styling (The Lesson Card) */
-.action-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
+/* 7. Output Section (The "Final Boss" Card) */
 .lesson-card {
     background: var(--card-bg);
     color: var(--card-text);
     padding: 3rem;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 0 50px var(--primary), inset 0 0 30px var(--accent);
+    animation: strobeCard 5s infinite;
+    transform-origin: center;
 }
 
-.lp-header {
+@keyframes strobeCard {
+    0%, 100% { background: rgba(255, 255, 255, 0.9); }
+    50% { background: rgba(200, 255, 255, 0.95); box-shadow: 0 0 100px var(--accent); }
+}
+
+.lp-header h2 {
+    font-size: 2.5rem;
     text-align: center;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 1rem;
-}
-
-.lp-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.lp-row {
-    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #f00, #0f0, #00f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: rainbowButton 1s infinite linear;
 }
 
 .lp-row.block-text div {
     margin-top: 0.5rem;
     padding: 1rem;
-    background: #f8fafc;
+    background: rgba(0, 255, 255, 0.1);
     border-radius: 8px;
-    border-left: 4px solid var(--primary);
-    white-space: pre-wrap;
+    border-left: 8px solid var(--primary);
+    animation: slideInWobble 2s infinite alternate;
 }
 
-hr {
-    border: 0;
-    border-top: 1px solid #e2e8f0;
-    margin: 1.5rem 0;
+@keyframes slideInWobble {
+    0% { transform: skewX(-2deg); border-left-color: var(--primary); }
+    100% { transform: skewX(2deg); border-left-color: var(--accent); }
 }
 
-/* Print Styles */
+/* Utilities */
+.hidden { display: none !important; }
+
+/* The reveal is aggressive now */
+.reveal {
+    animation: explodeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes explodeIn {
+    0% { opacity: 0; transform: scale(0.1) rotate(180deg); }
+    50% { transform: scale(1.2) rotate(-10deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+/* Print Styles - Left normal so you can actually print it without wasting 10 ink cartridges */
 @media print {
     body {
-        background: white;
-        color: black;
-        animation: none;
+        background: white !important;
+        color: black !important;
+        animation: none !important;
+        filter: none !important;
     }
-    #cursor-glow, .glass-nav, #form-container, .action-bar {
-        display: none !important;
-    }
-    .container {
-        margin: 0;
-        padding: 0;
-        max-width: 100%;
-    }
-    .lesson-card {
-        box-shadow: none;
-        padding: 0;
-    }
-    .lp-row.block-text div {
-        border-left: 2px solid #000;
-        background: transparent;
-    }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .lp-grid, .form-grid { grid-template-columns: 1fr; }
-    .glass-nav { flex-direction: column; gap: 1rem; }
-    .nav-links a { margin: 0 1rem; }
-    .action-bar { flex-direction: column; gap: 1rem; align-items: stretch; }
-    .btn-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    * { animation: none !important; transition: none !important; text-shadow: none !important; box-shadow: none !important; transform: none !important; }
+    #cursor-glow, .glass-nav, #form-container, .action-bar { display: none !important; }
+    .container { margin: 0; padding: 0; max-width: 100%; }
+    .lesson-card { box-shadow: none; padding: 0; background: white; }
+    .lp-row.block-text div { border-left: 2px solid #000; background: transparent; }
 }

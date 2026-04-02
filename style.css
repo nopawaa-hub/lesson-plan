@@ -1,127 +1,139 @@
-/* Custom Properties & Variables - Now with 100% more neon */
+/* Custom Properties & Variables - The Full Rainbow */
 :root {
-    --primary: #ff00ff;
-    --primary-hover: #ff1493;
-    --accent: #00ffff;
-    --bg-gradient-1: #ff0055;
-    --bg-gradient-2: #3a00ff;
-    --bg-gradient-3: #00ffcc;
-    --bg-gradient-4: #ffff00;
-    --glass-bg: rgba(255, 255, 255, 0.15);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --text-main: #ffffff;
-    --text-muted: #e0e0e0;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --card-text: #0f172a;
+    --c1: #ff0000;
+    --c2: #ff7f00;
+    --c3: #ffff00;
+    --c4: #00ff00;
+    --c5: #0000ff;
+    --c6: #4b0082;
+    --c7: #9400d3;
+    --c8: #ff00ff;
+    --c9: #00ffff;
+    --c10: #ff1493;
+    
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --card-text: #000000;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    /* Everything smoothly transitions, constantly */
-    transition: all 0.1s ease-in-out; 
+    font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif; /* Changed for maximum chaos */
+    transition: all 0.1s ease-in-out;
 }
 
-/* 1. The "Seizure" Background */
+/* 1. The Infinite Rainbow Background */
 body {
-    background: linear-gradient(45deg, var(--bg-gradient-1), var(--bg-gradient-2), var(--bg-gradient-3), var(--bg-gradient-4));
-    background-size: 800% 800%;
-    animation: crazyGradient 3s infinite linear;
-    color: var(--text-main);
+    background: linear-gradient(
+        45deg, 
+        var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), 
+        var(--c6), var(--c7), var(--c8), var(--c9), var(--c10)
+    );
+    background-size: 2000% 2000%;
+    animation: rainbowVomit 4s infinite linear;
+    color: #ffffff;
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
-    perspective: 1000px; /* For 3D wildness */
+    perspective: 1000px;
 }
 
-@keyframes crazyGradient {
-    0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
-    50% { background-position: 100% 50%; filter: hue-rotate(180deg); }
-    100% { background-position: 0% 50%; filter: hue-rotate(360deg); }
+@keyframes rainbowVomit {
+    0% { background-position: 0% 50%; filter: hue-rotate(0deg) saturate(200%); }
+    50% { background-position: 100% 50%; filter: hue-rotate(180deg) saturate(300%); }
+    100% { background-position: 0% 50%; filter: hue-rotate(360deg) saturate(200%); }
 }
 
-/* 2. The Overactive Cursor */
+/* 2. The Color-Changing Cursor */
 #cursor-glow {
     position: fixed;
     top: 0;
     left: 0;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0, 255, 255, 0.8) 0%, rgba(255, 0, 255, 0.4) 40%, rgba(0,0,0,0) 80%);
+    width: 400px;
+    height: 400px;
+    background: conic-gradient(
+        from 0deg, 
+        red, yellow, lime, aqua, blue, magenta, red
+    );
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
     z-index: 0;
-    mix-blend-mode: screen;
-    animation: cursorPulse 0.5s infinite alternate;
+    mix-blend-mode: color-dodge;
+    animation: cursorSpin 1s infinite linear;
+    opacity: 0.6;
+    filter: blur(20px);
 }
 
-@keyframes cursorPulse {
-    0% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) scale(1.5) rotate(180deg); }
+@keyframes cursorSpin {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.8); }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(0.8); }
 }
 
-/* 3. Bouncing Navigation */
+/* 3. Navigation - RGB Trim */
 .glass-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1.5rem 5%;
-    background: var(--glass-bg);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--accent);
+    border-bottom: 5px solid;
+    border-image: linear-gradient(to right, var(--c1), var(--c3), var(--c5), var(--c8)) 1;
     position: sticky;
     top: 0;
     z-index: 100;
-    animation: navBounce 2s infinite ease-in-out;
-    box-shadow: 0 10px 30px rgba(0, 255, 255, 0.5);
+    animation: navBounce 1.5s infinite ease-in-out;
 }
 
 @keyframes navBounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(5px); }
+    0%, 100% { transform: translateY(0); box-shadow: 0 10px 50px var(--c1); }
+    33% { transform: translateY(3px); box-shadow: 0 10px 50px var(--c4); }
+    66% { transform: translateY(-3px); box-shadow: 0 10px 50px var(--c8); }
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    background: linear-gradient(to right, #ff00ff, #00ffff, #ffff00);
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+    background-size: 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textFlicker 1s infinite;
+    animation: textRainbowStream 2s infinite linear;
+    text-shadow: 2px 2px 0px rgba(255,255,255,0.5);
 }
 
-@keyframes textFlicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary); }
-    20%, 24%, 55% { text-shadow: none; }
+@keyframes textRainbowStream {
+    0% { background-position: 0%; }
+    100% { background-position: 100%; }
 }
 
 .nav-links a {
-    color: var(--text-main);
+    color: var(--c3);
     text-decoration: none;
     margin-left: 2rem;
     font-weight: bold;
-    animation: linkWiggle 3s infinite;
-    display: inline-block;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 5px #000;
+    animation: colorSwapLink 2s infinite alternate;
 }
 
 .nav-links a:hover {
-    color: var(--accent);
-    transform: scale(1.3) rotate(10deg);
-    text-shadow: 0 0 15px var(--accent);
+    transform: scale(1.5) rotate(15deg);
+    color: var(--c8);
+    text-shadow: 0 0 20px var(--c8), 0 0 40px var(--c9);
 }
 
-@keyframes linkWiggle {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-5deg); }
-    75% { transform: rotate(5deg); }
+@keyframes colorSwapLink {
+    0% { color: var(--c3); }
+    50% { color: var(--c9); }
+    100% { color: var(--c10); }
 }
 
-/* 4. Main Layout & Floating Cards */
+/* 4. Main Cards - Disco Mode */
 .container {
     max-width: 1000px;
     margin: 3rem auto;
@@ -131,33 +143,35 @@ body {
 }
 
 .glass-card {
-    background: var(--glass-bg);
+    background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(0,0,255,0.2));
     backdrop-filter: blur(12px);
-    border: 3px solid var(--glass-border);
-    border-radius: 20px;
+    border: 5px dashed var(--c4);
+    border-radius: 30px;
     padding: 2.5rem;
-    box-shadow: 0 0 40px rgba(255, 0, 255, 0.5), inset 0 0 20px rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 40px var(--c8), inset 0 0 30px var(--c3);
     margin-bottom: 2rem;
-    animation: cardFloat 3s infinite alternate ease-in-out;
+    animation: discoCard 2s infinite alternate ease-in-out;
 }
 
-@keyframes cardFloat {
-    0% { transform: translateY(0px) rotateX(2deg) rotateY(-2deg); box-shadow: 0 0 40px rgba(255, 0, 255, 0.5); }
-    100% { transform: translateY(-20px) rotateX(-2deg) rotateY(2deg); box-shadow: 0 0 60px rgba(0, 255, 255, 0.8); border-color: var(--primary); }
+@keyframes discoCard {
+    0% { border-color: var(--c1); box-shadow: 0 0 40px var(--c1); background: rgba(255,255,0,0.2); transform: rotateX(2deg) rotateY(-2deg); }
+    50% { border-color: var(--c4); box-shadow: 0 0 60px var(--c4); background: rgba(0,255,255,0.2); }
+    100% { border-color: var(--c8); box-shadow: 0 0 40px var(--c8); background: rgba(255,0,255,0.2); transform: rotateX(-2deg) rotateY(2deg); }
 }
 
 .section-header h2 {
-    font-size: 2rem;
-    text-shadow: 2px 2px 0px #ff00ff, -2px -2px 0px #00ffff;
-    animation: rgbSplit 0.5s infinite alternate;
+    font-size: 2.5rem;
+    color: #fff;
+    text-shadow: 3px 3px 0 var(--c1), -3px -3px 0 var(--c5), 0 0 20px var(--c3);
+    animation: titleShake 0.3s infinite;
 }
 
-@keyframes rgbSplit {
-    0% { text-shadow: 3px 0 0 red, -3px 0 0 cyan; }
-    100% { text-shadow: -3px 0 0 red, 3px 0 0 cyan; }
+@keyframes titleShake {
+    0% { transform: skewX(-5deg); text-shadow: 3px 3px 0 var(--c1), -3px -3px 0 var(--c4); }
+    100% { transform: skewX(5deg); text-shadow: -3px -3px 0 var(--c8), 3px 3px 0 var(--c3); }
 }
 
-/* 5. Inputs That Won't Sit Still */
+/* 5. Inputs - Color Explosion */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -169,147 +183,172 @@ body {
 label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 5px #ff00ff;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--c3);
+    text-shadow: 2px 2px 0px #000;
+    animation: labelFlash 1s infinite alternate;
+}
+
+@keyframes labelFlash {
+    0% { color: var(--c3); }
+    100% { color: var(--c9); }
 }
 
 input, select, textarea {
     width: 100%;
-    padding: 0.8rem 1rem;
-    background: rgba(0, 0, 0, 0.4);
-    border: 2px solid var(--accent);
-    border-radius: 10px;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: 4px solid;
+    border-image: linear-gradient(45deg, var(--c1), var(--c3), var(--c5), var(--c8)) 1;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
     outline: none;
-    animation: inputPulse 2s infinite alternate;
+    animation: inputPulseColor 2s infinite alternate;
 }
 
-@keyframes inputPulse {
-    0% { box-shadow: 0 0 5px var(--accent); border-color: var(--accent); }
-    100% { box-shadow: 0 0 20px var(--primary); border-color: var(--primary); transform: scale(1.02); }
+@keyframes inputPulseColor {
+    0% { box-shadow: 0 0 10px var(--c1); background: rgba(50, 0, 0, 0.6); }
+    50% { box-shadow: 0 0 20px var(--c4); background: rgba(0, 50, 0, 0.6); }
+    100% { box-shadow: 0 0 10px var(--c8); background: rgba(50, 0, 50, 0.6); }
 }
 
 input:focus, select:focus, textarea:focus {
-    animation: inputFocusShake 0.2s infinite;
-    background: rgba(255, 255, 255, 0.2);
+    background: linear-gradient(90deg, rgba(255,0,0,0.3), rgba(0,0,255,0.3));
+    animation: inputFocusShakeColor 0.1s infinite;
 }
 
-@keyframes inputFocusShake {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-3px) rotate(-1deg); }
-    75% { transform: translateX(3px) rotate(1deg); }
-    100% { transform: translateX(0); }
+@keyframes inputFocusShakeColor {
+    0% { transform: translateX(0); border-color: var(--c3); }
+    50% { transform: translateX(-5px) rotate(-2deg); border-color: var(--c8); }
+    100% { transform: translateX(5px) rotate(2deg); border-color: var(--c4); }
 }
 
-/* 6. Hyperactive Buttons */
+/* 6. Buttons - Pure RGB Energy */
 button {
     cursor: pointer;
     border: none;
-    border-radius: 10px;
+    border-radius: 50px; /* Pill shape for maximum aesthetic clash */
     font-weight: 900;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 1rem 2rem;
+    justify-content: center;
+    gap: 10px;
+    padding: 1.2rem 2.5rem;
     position: relative;
     overflow: hidden;
+    color: #000;
 }
 
 .btn-primary {
-    background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
-    background-size: 300%;
-    color: white;
-    animation: rainbowButton 2s infinite linear, heartbeat 0.8s infinite;
-    box-shadow: 0 0 20px #fff;
+    background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4), var(--c5), var(--c6), var(--c7));
+    background-size: 400%;
+    animation: rainbowButtonFast 0.5s infinite linear, heartbeatColor 0.6s infinite;
+    box-shadow: 0 0 20px var(--c1), 0 0 40px var(--c3), 0 0 60px var(--c5);
 }
 
-@keyframes rainbowButton {
+@keyframes rainbowButtonFast {
     0% { background-position: 0%; }
     100% { background-position: 100%; }
 }
 
-@keyframes heartbeat {
-    0% { transform: scale(1); }
-    20% { transform: scale(1.15); }
-    40% { transform: scale(1); }
-    60% { transform: scale(1.15); }
-    80%, 100% { transform: scale(1); }
+@keyframes heartbeatColor {
+    0% { transform: scale(1); box-shadow: 0 0 20px var(--c1); }
+    50% { transform: scale(1.2); box-shadow: 0 0 60px var(--c4); }
+    100% { transform: scale(1); box-shadow: 0 0 20px var(--c8); }
 }
 
 .btn-primary:hover {
-    transform: scale(1.3) rotate(5deg);
-    box-shadow: 0 0 50px #fff, 0 0 100px var(--primary);
-    animation: none; /* Stop heartbeat on hover so they can actually click it */
+    transform: scale(1.4) rotate(-10deg);
+    color: #fff;
+    text-shadow: 0 0 10px #000;
+    animation: textRainbowStream 0.2s infinite; /* Even faster on hover */
 }
 
-/* 7. Output Section (The "Final Boss" Card) */
+/* 7. Output Section - The Multi-Colored Final Boss */
 .lesson-card {
-    background: var(--card-bg);
-    color: var(--card-text);
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 0.9) 20px,
+        rgba(255, 255, 0, 0.8) 20px,
+        rgba(255, 255, 0, 0.8) 40px,
+        rgba(0, 255, 255, 0.8) 40px,
+        rgba(0, 255, 255, 0.8) 60px
+    );
+    color: #000;
     padding: 3rem;
-    border-radius: 12px;
-    box-shadow: 0 0 50px var(--primary), inset 0 0 30px var(--accent);
-    animation: strobeCard 5s infinite;
-    transform-origin: center;
+    border-radius: 15px;
+    border: 10px solid var(--c8);
+    box-shadow: 0 0 50px var(--c1), inset 0 0 50px var(--c4);
+    animation: strobeCardColor 1s infinite;
 }
 
-@keyframes strobeCard {
-    0%, 100% { background: rgba(255, 255, 255, 0.9); }
-    50% { background: rgba(200, 255, 255, 0.95); box-shadow: 0 0 100px var(--accent); }
+@keyframes strobeCardColor {
+    0% { border-color: var(--c1); }
+    33% { border-color: var(--c4); }
+    66% { border-color: var(--c8); }
+    100% { border-color: var(--c1); }
 }
 
 .lp-header h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     text-align: center;
-    background: linear-gradient(45deg, #f00, #0f0, #00f);
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: rainbowButton 1s infinite linear;
+    animation: textRainbowStream 1s infinite reverse;
+    font-family: 'Impact', sans-serif;
+    letter-spacing: 5px;
+}
+
+.lp-item strong, .lp-row strong {
+    color: var(--c6);
+    font-size: 1.2rem;
+    background: var(--c3);
+    padding: 2px 5px;
+    border-radius: 5px;
 }
 
 .lp-row.block-text div {
     margin-top: 0.5rem;
-    padding: 1rem;
-    background: rgba(0, 255, 255, 0.1);
-    border-radius: 8px;
-    border-left: 8px solid var(--primary);
-    animation: slideInWobble 2s infinite alternate;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(255,0,0,0.1), rgba(0,0,255,0.1));
+    border-radius: 15px;
+    border: 4px dashed var(--c4);
+    font-size: 1.1rem;
+    font-weight: bold;
+    animation: borderDance 1s infinite linear;
 }
 
-@keyframes slideInWobble {
-    0% { transform: skewX(-2deg); border-left-color: var(--primary); }
-    100% { transform: skewX(2deg); border-left-color: var(--accent); }
+@keyframes borderDance {
+    0% { border-color: var(--c1); transform: skewY(1deg); background: rgba(255,0,0,0.2); }
+    50% { border-color: var(--c5); transform: skewY(-1deg); background: rgba(0,0,255,0.2); }
+    100% { border-color: var(--c8); transform: skewY(1deg); background: rgba(255,0,255,0.2); }
 }
 
 /* Utilities */
 .hidden { display: none !important; }
 
-/* The reveal is aggressive now */
 .reveal {
-    animation: explodeIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: colorExplodeIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes explodeIn {
-    0% { opacity: 0; transform: scale(0.1) rotate(180deg); }
-    50% { transform: scale(1.2) rotate(-10deg); }
-    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+@keyframes colorExplodeIn {
+    0% { opacity: 0; transform: scale(0) rotate(720deg); filter: blur(20px) hue-rotate(0deg); }
+    50% { filter: blur(0px) hue-rotate(180deg); transform: scale(1.5); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); filter: hue-rotate(360deg); }
 }
 
-/* Print Styles - Left normal so you can actually print it without wasting 10 ink cartridges */
+/* Print Styles - Still forcing this to be black and white so you don't ruin a printer */
 @media print {
-    body {
-        background: white !important;
-        color: black !important;
-        animation: none !important;
-        filter: none !important;
-    }
-    * { animation: none !important; transition: none !important; text-shadow: none !important; box-shadow: none !important; transform: none !important; }
+    body { background: white !important; color: black !important; animation: none !important; filter: none !important; }
+    * { animation: none !important; transition: none !important; text-shadow: none !important; box-shadow: none !important; transform: none !important; background: transparent !important; color: black !important; font-family: Arial, sans-serif !important;}
     #cursor-glow, .glass-nav, #form-container, .action-bar { display: none !important; }
     .container { margin: 0; padding: 0; max-width: 100%; }
-    .lesson-card { box-shadow: none; padding: 0; background: white; }
-    .lp-row.block-text div { border-left: 2px solid #000; background: transparent; }
+    .lesson-card { box-shadow: none; padding: 0; border: none; background: white !important; }
+    .lp-row.block-text div { border-left: 2px solid #000; border-top: none; border-bottom: none; border-right: none; border-radius: 0; }
 }
